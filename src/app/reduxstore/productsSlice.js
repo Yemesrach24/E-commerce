@@ -1,8 +1,6 @@
-import {createSlice, PayLoadAction} from 'reduxjs/toolkit';
+import { createSlice} from '@reduxjs/toolkit';
 
-const initialState = {
-    items: [],
-};
+const initialState = { items: [], };
 
 export const productsSlice = createSlice({
     name: 'products-cart',
@@ -34,3 +32,6 @@ export const productsSlice = createSlice({
         }      
     },
 });
+
+export const { addProduct, deleteProduct } = productsSlice.actions;
+export default productsSlice.reducer;
