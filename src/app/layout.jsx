@@ -4,6 +4,7 @@ import "./globals.css";
 import { Provider } from "react-redux";  
 import store from "./reduxstore/productStore";  
 import Header from "./component/Header";
+import Footer from "./component/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,9 +22,10 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Provider store={store}> 
           <Header />
-          <main className="min-h-screen">
+          <main className="min-h-screen mt-16 ">
             {children}
           </main>
+          <Footer/>
         </Provider>
       </body>
     </html>
