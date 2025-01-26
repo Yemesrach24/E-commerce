@@ -6,7 +6,7 @@ import Image from "next/image";
 async function fetchData() {
   try {
     const response = await axios.get("https://fakestoreapi.com/products");
-    return response.data;  // Return the product data
+    return response.data;  
   } catch (error) {
     console.error("Fetching error", error);
     return null;
@@ -17,31 +17,45 @@ export default async function Home() {
   const products = await fetchData();
 
   return (
-    <main>
+ <main>
+    <div className="container mx-auto py-10 px-4">
+ 
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
     
-      <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center">
-        {products.map((product) => (
-          <div className="flex flex-col justify-center items-center border shadow-xl cursor-pointer py-10 px-8 m-4" key={product.id}>
-            <p className="text-2xl text-ellipsis-violet-500 pt-5 font-serif font-bold ">{product.title}</p>
-            <Image 
-                src={product.image} 
-                alt={product.title} 
-                width={200} 
-                height={200} 
-                className="cursor-pointer hover:scale-105 transition-all duration-300 border border-spacing-4 rounded-sm h-70 w-auto"
-              />
-             
-            <p>${product.price}</p>
+      {products.map((product) => (
+      <div
+        key={product.id}
+        className="flex flex-col justify-between items-center border border-gray-200 rounded-lg shadow-xl cursor-pointer p-6 bg-white transition-all duration-300 ease-in-out hover:shadow-2xl"
+      >
+    
+        <div className="w-full h-48 mb-4 flex justify-center">
+          <Image
+            src={product.image}
+            alt={product.title}
+            width={200} 
+            height={200} 
+            className="object-contain" 
+          />
+        </div>
+        
+        
+        <p className="font-serif font-bold text-lg text-center mt-4 mb-2">{product.title}</p>
 
-            <Link href={`/product/${product.id}`}>
+    
+        <p className="text-lg font-semibold text-gray-800 mb-4">${product.price}</p>
 
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Details</button>
-           
-            </Link>
-
-          </div>
-        ))}
+  
+        <Link href={`/product/${product.id}`}>
+          <button className="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-6 rounded-md w-full mt-auto transition-all duration-300 ease-in-out">
+            Details
+          </button>
+        </Link>
       </div>
+    ))}
+  </div>
+</div>
+
+
     </main>
   );
 }
